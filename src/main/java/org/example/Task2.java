@@ -16,14 +16,18 @@ public class Task2 {
                 }
 
                 int number = Integer.parseInt(input);
-                Future<Integer> future = executorService.submit(() -> calculateSquare(number));
-                int result = future.get();
-                System.out.println("Result: " + result);
+                CompletableFuture.runAsync(() -> {
+                    int square = calculateSquare(number);
+                    System.out.println("Result: " + square);
+                });
+//                future.join();
+//                int result = future.get();
+//                System.out.println("Result: " + result);
             }
-        } catch (InterruptedException e) {
-            System.out.println("Interrupted: " + e.getMessage());
-        } catch (ExecutionException e) {
-            System.out.println("Execution exception: " + e.getMessage());
+//        } catch (InterruptedException e) {
+//            System.out.println("Interrupted: " + e.getMessage());
+//        } catch (ExecutionException e) {
+//            System.out.println("Execution exception: " + e.getMessage());
         } catch (NumberFormatException e) {
             System.out.println("Wrong format of the number");
         }

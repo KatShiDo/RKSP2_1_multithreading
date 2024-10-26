@@ -81,7 +81,7 @@ public class CustomArray {
     }
 
     public int findMinFork() {
-        try (var forkJoin = new ForkJoinPool()) {
+        try (ForkJoinPool forkJoin = new ForkJoinPool()) {
             var task = new MinFinderTask(array, 0, array.size());
             return forkJoin.invoke(task);
         }
